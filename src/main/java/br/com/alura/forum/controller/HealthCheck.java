@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class HealthCheck {
 
-    @RequestMapping("/")
+    @RequestMapping("/health")
     @ResponseBody
     public String HealthCheck(){
         return "ok";
