@@ -5,10 +5,16 @@ import br.com.alura.forum.model.Topico;
 import br.com.alura.forum.repository.CursoRepository;
 import br.com.alura.forum.repository.TopicoRepository;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class TopicosForm {
 
+    @NotNull @NotEmpty
     private String titulo;
+    @NotNull @NotEmpty
     private String mensagem;
+    @NotNull @NotEmpty
     private String nomeCurso;
 
     public String getTitulo() {
@@ -37,7 +43,7 @@ public class TopicosForm {
 
     public Topico converter(CursoRepository repository) {
 
-        Curso curso = repository.findByName(this.nomeCurso);
+        Curso curso = repository.findByNome(this.nomeCurso);
 
         return new Topico(
             this.titulo,

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -28,12 +29,11 @@ public class TopicosController {
 
     @GetMapping
     public List<TopicosDto> lista(String nomeCurso){
-        List<Topico> topicos = nomeCurso.isEmpty() ? topicoRepository.findAll() : topicoRepository.findByCursoNome(nomeCurso) ;
+        List<Topico> topicos = nomeCurso== null ? topicoRepository.findAll() : topicoRepository.findByCursoNome(nomeCurso) ;
         return TopicosDto.converter(topicos);
     }
-
     @PostMapping
-    public ResponseEntity<TopicosDto> cadastrar(@RequestBody TopicosForm form, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<TopicosDto> cadastrar(@RequestBody @Valid TopicosForm form, UriComponentsBuilder uriBuilder){
         Topico topico = form.converter(cursoRepository);
         topicoRepository.save(topico);
 
